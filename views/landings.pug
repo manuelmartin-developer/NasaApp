@@ -1,0 +1,57 @@
+doctype html
+html
+  head
+    title Landings
+    link(rel='stylesheet', href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css', integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==', crossorigin='')
+    link(rel='icon' href='/public/assets/favicon.ico')
+    style
+        include ../public/css/style.css
+        include ../public/css/menu.css
+    script(src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js")
+
+  body
+    include ./header.pug
+    #portrait
+        .phone
+        .message
+            | Please rotate your device!
+    #containerLandings
+        #map(style='width: 100%; height: 400px;')
+        #filters
+            #landings_info
+                p#amount_landings
+                    |Now are 
+                    span=`${data.length} `
+                    |landings on the map
+                input(type="button", value="Reset" onclick="location.href='/api/astronomy/landings/'" id="btn_reset")
+            #queriesLandings
+                form(action='/api/astronomy/landings' method='GET' name='minimum_mass' id='formMinMass' autocomplete="off")
+                    input(type='number' name='minimum_mass' placeholder='Insert minimum mass' id='input_min_mass')
+                    input(type='submit' value='Filter by minimum mass' id='btn_min_mass')
+                form(action='' method='GET' name='equal_mass' id='formEquMass' autocomplete="off")
+                    input(type='number' name='mass' placeholder='Insert mass' id='input_mass')
+                    input(type="button", value="Filter by mass" onclick="location.href=`/api/astronomy/landings/mass/${mass.value}`" id="btn_mass")
+                form(action='' method='GET' name='recclass' id='formRecclass' autocomplete="off")
+                    input(id='input_class' list='recclass' name='recclass' placeholder='Insert class type')
+                    - let landings_recclass = [];
+                    - for(let landing of data){
+                    -    if(landings_recclass.indexOf(landing.recclass) === -1) {
+                    -    landings_recclass.push(landing.recclass);
+                    -    }
+                    - }
+                    datalist(id='recclass')
+                        each element in landings_recclass
+                            option(value=element)=element
+                    input(type="button", value="Filter by class" onclick="location.href=`/api/astronomy/landings/class/${recclass.value}`" id="btn_class")
+                form(action='/api/astronomy/landings' method='GET' name='year' id='formYear' autocomplete="off")
+                    #input_years
+                        input(type='number' name='from' placeholder='From' id='input_from' min="0" max=new Date().getFullYear())
+                        input(type='number' name='to' placeholder='To' id='input_to' min="0" max=new Date().getFullYear())
+                    input(type='submit' value='Filter by years' id='btn_years')
+
+    script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==', crossorigin='')
+    script.
+        const data = !{jsStringify(data)};
+    script(src="/utils/map.js")
+
+        

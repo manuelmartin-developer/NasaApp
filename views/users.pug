@@ -1,0 +1,41 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.13.1/css/all.css' integrity='sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q' crossorigin='anonymous')
+        style
+            include ../public/css/style.css
+            include ../public/css/menu.css
+        title Users
+    body
+        include ./header.pug
+        #container_form
+            #container_users
+                p#amount_users
+                    |Now are&nbsp;
+                    span=` ${data.length}`
+                    |&nbsp;users in database
+                #resultUsers
+                    each user in data
+                        #user
+                            p=user.afNumber
+                            #buttons
+                                a(href=`/edit/${user.afNumber}`, target="_self", rel="noopener noreferrer" class="far fa-edit")
+                                form(method="POST", action=`/api/astronomy/guild/${user.afNumber}?_method=DELETE`)
+                                    input(type="hidden", name="token" value=token)
+                                    button(type="submit" class="far fa-trash-alt" id=user.afNumber)
+                        hr
+                input#btn_goback(type="button", value="Go back" onclick="window.history.back()")
+        script.
+            const data = !{jsStringify(data)};
+            let deleteButtons = document.querySelectorAll("button")
+            for(let user of data){
+                if(user.deleted === true){
+                    let deleteNumber = user.afNumber;
+                    let deleteButton = document.querySelector(`#${deleteNumber}`)
+                    deleteButton.style.color = 'red';
+                }
+            }
+

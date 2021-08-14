@@ -1,0 +1,87 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        style
+            include ../public/css/style.css
+            include ../public/css/menu.css
+        title Edit User
+    body
+        include ./header.pug
+        #container_form
+            form(id="edit_form" method="POST" action=`/api/astronomy/guild/${user.afNumber}?_method=PUT` autocomplete="off")
+                label(for="name") Affiliated Number
+                input(type="text" name="afNumber" id="afNumber" value=user.afNumber disabled) 
+                label(for="name") Name
+                input(type="text" name="name" id="input_name" value=user.name disabled) 
+                label(for="nickname") Nickname
+                input(type="text" name="nickname" id="input_nickname" value=user.nickname) 
+                label(for="occupation") Occupation
+                input(type="text" name="occupation" id="input_occupation" value=user.occupation)
+                #neas_necs
+                    #neas
+                        label(for="neas") Designation New NEA
+                        input(type="text" name="neasDiscovered" id="input_neas")
+                    #necs
+                        label(for="necs") Designation New NEC
+                        input(type="text" name="necsDiscovered" id="input_necs")
+                input(type="hidden", name="token" value=token)
+                input(type="submit", value="Save Changes" id="btn_save")
+            form(id="edit_delete" method="POST", action=`/api/astronomy/guild/${user.afNumber}/delete?_method=PUT`)
+                label(for="delete" id="label_delete") Do you want to delete your account?
+                input(type="checkbox", name="delete" id="check_delete")
+                input(type="hidden", name="token" value=token)
+                input(type="submit", value="Delete Account" id="btn_delete")
+            form(action="/api/auth/dashboard", method="post" id="admin_panel")
+                input(type="hidden", name="token" value=token)
+                input(type="submit", value="Admin Panel" id="btn_admin_panel")
+        script.
+            const user = !{jsStringify(user)};
+            const token = !{jsStringify(token)};
+            sessionStorage.setItem('token', token);
+
+            const nickname = document.querySelector("#input_nickname");
+            const occupation = document.querySelector("#input_occupation");
+            const neas = document.querySelector("#input_neas");
+            const necs = document.querySelector("#input_necs");
+            const check_delete = document.querySelector("#check_delete");
+            let label_delete = document.querySelector("#label_delete");
+
+            if (user.deleted == true){
+
+                label_delete.innerHTML = "The deletion of this account has been requested, contact the administrator"
+                check_delete.checked = true
+                check_delete.disabled = true
+                nickname.disabled = true
+                occupation.disabled = true
+
+            }else{
+                check_delete.checked = false;
+            }  
+            
+
+            const btn_save = document.querySelector("#btn_save");
+            const btn_delete = document.querySelector("#btn_delete");
+
+            btn_save.disabled = true
+            btn_delete.disabled = true
+
+            nickname.addEventListener("change", () => {
+                btn_save.disabled = false;
+            });
+            occupation.addEventListener("change", () => {
+                btn_save.disabled = false;
+            });
+            neas.addEventListener("change", () => {
+                btn_save.disabled = false;
+            });
+            necs.addEventListener("change", () => {
+                btn_save.disabled = false;
+            });
+
+            check_delete.addEventListener("change", () => {
+                check_delete.checked ? btn_delete.disabled = false :
+                                        btn_delete.disabled = true
+            })
