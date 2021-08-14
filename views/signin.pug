@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        script(src="https://kit.fontawesome.com/a5b1eae3e6.js" crossorigin="anonymous") 
+        style
+            include ../public/css/style.css
+            include ../public/css/menu.css
+        title Sign in
+    body
+        include ./header.pug
+        #container_form
+            form(id="signin_form" action="http://localhost:3000/api/astronomy/guild/signin", method="POST" autocomplete="off")
+                label(for="nickname") Nickname
+                input(type="text" name="nickname" id="nickname") 
+                label(for="password") Password
+                #pass_container
+                    input(type="password" name="password" id="password") 
+                    i(id="togglePassword" class="fas fa-eye-slash")
+                input(type="submit", value="Sign in")
+
+        script.
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#password');
+             
+            togglePassword.addEventListener('click', () => {
+
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            togglePassword.className == 'fas fa-eye-slash' ? togglePassword.className = 'fas fa-eye':
+                                                            togglePassword.className = 'fas fa-eye-slash'
+            });

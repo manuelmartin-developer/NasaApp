@@ -1,0 +1,630 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: monospace;
+}
+body{
+	width: 100%;
+	background-color: rgba(44,44,44,1.00);
+}
+form>label{
+	color: orange;
+}
+/* HOME */
+#apodTitle{
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	font-size: 1.1rem;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: rgba(193,193,193,1.00);
+	height: 10vh;
+	
+}
+#dayimg{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+#apod{
+	display: flex;
+	flex-direction: column;
+
+	width: 100%;
+}
+#apod img{
+	width: 100%;
+}
+#apodExplanation{
+	text-align: justify;
+	padding: 10px;
+	color: rgba(193,193,193,1.00);
+	line-height: 1.3rem;
+	
+}
+#copyright{
+	text-align: left;
+	font-style: italic;
+	font-weight: bold;
+	padding: 10px;
+	color: rgba(193,193,193,1.00);
+}
+/* LANDINGS */
+#containerLandings{
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	display: none;
+}
+#filters{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	height: 20vh;
+	margin: 0 10px;
+}
+#landings_info{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#queriesLandings{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: center;
+	margin-left: 10px;
+}
+#input_years{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	margin-bottom: 10px;
+}
+#input_years > input[type=number]{
+	outline: 0;
+	border-width: 0 0 1px;
+	background-color: transparent;
+	border-color: rgba(193,193,193,1.00);
+	margin-bottom: 10px;
+	width: 45%;
+}
+#input_years > input[type=number]:focus{
+	border-color: orange;
+}
+#formMinMass, #formEquMass, #formRecclass, #formYear{
+	display: flex;
+	flex-direction: column;
+	margin: 0 10px;
+}
+#formMinMass *, #formEquMass *, #formRecclass *, #formYear *{
+	height: 2rem;
+}
+input[type=number], input[list], input[type=date], input[type=text], input[type=password]{
+	outline: 0;
+	border-width: 0 0 1px;
+	background-color: transparent;
+	border-color: rgba(193,193,193,1.00);
+	margin-bottom: 10px;
+	color: rgba(193,193,193,1.00);
+}
+input[type=number]:focus, input[list]:focus, input[type=date]:focus, input[type=text]:focus, input[type=password]:focus{
+
+	border-color: orange;
+}
+
+#amount_landings{
+	color: rgba(193,193,193,1.00);
+	margin-bottom: 10px;
+}
+span{
+	color: orange;
+	font-weight: bold;
+}
+#portrait {
+    background: rgba(44,44,44,1.00);
+    height: 100vh ;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+
+  .phone {
+    height: 200px;
+    width: 400px;
+    border: 3px solid rgba(193,193,193,1.00);
+    border-radius: 10px;
+    margin-bottom: 80px;
+    animation: rotate 1.5s ease-in-out infinite alternate;
+  }
+  
+  .message {
+    color: rgba(193,193,193,1.00);
+    font-size: 2.5rem;
+    margin-top: 40px;
+
+  }
+  
+  @keyframes rotate {
+    0% {
+          transform: rotate(0deg)
+      }
+      50% {
+          transform: rotate(-90deg)
+      }
+      100% {
+          transform: rotate(-90deg)
+      }
+  }
+  
+/* NEAs */
+#containerNeas{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	margin: 0 10px;
+}
+#neas_info{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 40px;
+}
+#amount_neas{
+	align-items: center;
+	color: rgba(193,193,193,1.00);
+	margin-right: 10px;
+}
+#queriesNeas, #resultNeas{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+}
+#inputs_date{
+	display: flex;
+	justify-content: space-between;
+
+}
+#formDate > input[type=date]{
+	width: 50%;
+}
+#formDate > input[type=submit]{
+	width: 100%;
+}
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+#formClass{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+
+#chart{
+	margin-top: 50px;
+	margin-bottom: 50px;
+	max-width: 600px;
+}
+#neas_filters{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 20vh;
+}
+
+#resultNeas{
+	color: rgba(193,193,193,1.00);
+}
+#resultTable_neas, #resultTable_search{
+	margin: 30px 0;
+}
+table, th, td{
+	border: 1px solid rgba(193,193,193,1.00);
+	text-align: center;
+	padding: 2px;
+	border-collapse: collapse;
+}
+th{color: orange;}
+#result_neas>tbody>tr:nth-child(odd){
+	background-color: rgba(193,193,193,1.00);
+	color: black;
+}
+/* USERS */
+#amount_users{
+	color: rgba(193,193,193,1.00);
+	height: 10vh;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+#container_users{
+	display: flex;
+	flex-direction: column;
+	margin: 0 10px;
+}
+#resultUsers{
+	color: rgba(193,193,193,1.00);
+	display: flex;
+	flex-direction: column;
+}
+
+
+#user{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+#user>p{
+	
+	color: orange;
+	font-weight: bold;
+}
+#buttons{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+#buttons>form>button{
+	background-color: transparent;
+	border: none;
+	color: orange;
+	margin-left: 10px;
+}
+#buttons>a{
+	text-decoration: none;
+	color: orange;
+}
+#container_search{
+	display: flex;
+	flex-direction: column;
+	margin: 80px 10px 10px 10px;
+}
+/* MESSAGE */
+#message{
+	color: rgba(193,193,193,1.00);
+	height: 50vh;
+	text-align: justify;
+	margin: 0 10px;
+	vertical-align: middle;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+}
+#message>p{
+	margin-bottom: 40px;
+}
+
+/* EDIT USER */
+#edit_form{
+	display: flex;
+	flex-direction: column;
+	margin: 60px 10px 30px 10px;
+	text-align: center;
+	color: rgba(193,193,193,1.00);
+}
+#edit_form>label, #edit_form>input[type="submit"]{
+	margin: 10px 0;
+}
+#edit_delete{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 10px 10px 30px 10px;
+	text-align: center;
+	color: rgba(193,193,193,1.00);
+	
+}
+#edit_delete>label, #edit_delete>input[type="checkbox"]{
+	margin-bottom: 10px;
+}
+#edit_delete>input[type="submit"]{
+	width: 100%;
+}
+#goBack{
+	display: flex;
+	justify-content: center;
+}
+/* SEARCH */
+#resultTable_search{
+	color: rgba(193,193,193,1.00);
+}
+#btn_afNumber{
+	width: 100%;
+}
+#showUser{
+	display: flex;
+	justify-content: center;
+
+}
+/* REGISTER */
+#register_form{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin: 60px 10px 0 10px  ;
+	color: rgba(193,193,193,1.00);
+
+}
+#register_form> label, #register_form>input, #pass_container{
+	margin-bottom: 20px;
+}
+#register_form>input[type="submit"]{
+	margin-top: 30px;
+}
+#pass_container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	
+}
+
+
+/* SIGN IN */
+#signin_form{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin: 60px 10px 0 10px  ;
+	color: rgba(193,193,193,1.00);
+
+}
+#pass_container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	
+}
+#pass_container>input{
+	margin-right: 10px;
+	width: 84vw !important;
+}
+#admin_panel{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#btn_admin_panel{
+	width: 80% !important;
+	background-color: orange;
+	margin-top: 30px;
+}
+/* ADMIN PANEL */
+
+#admin_buttons{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 60px 10px 0 10px;
+}
+#admin_buttons>form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;	
+	margin: 20px 10px 0 10px;
+	background-color: orange;
+	width: 100% !important;
+}
+#admin_buttons>form>input[type=submit]{
+	width: 100% !important;
+	background-color: orange;
+}
+#neas_necs{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 10px;
+
+
+}
+#neas{
+	display: flex;
+	flex-direction: column;
+	padding-right: 5px;
+
+}
+#neas>input, #necs>input{
+	margin-top: 5px;
+}
+#neas>label, #necs>label{
+	color: orange;
+}
+#necs{
+	display: flex;
+	flex-direction: column;
+
+}
+#btn_goback{
+	margin-top: 20px;
+}
+
+
+
+/******************* MEDIA QUERIES**********************/
+  @media only screen and (min-width: 768px) and (orientation: landscape) {
+    #portrait {
+      display: none;
+    }
+	#containerLandings{
+		display: block;
+	}
+  }
+  @media only screen and (max-width:768px) {
+	#portrait {
+		display: none;
+	  }
+	  #containerLandings{
+		  display: block;
+	  }
+  }
+  /* MEDIA QUERIES */
+@media screen and (min-width: 768px) {
+
+	#apodTitle{
+		font-size: 1.5rem;
+		height: 12vh;
+	}
+	#apodExplanation{
+		font-size: 1.2rem;
+		line-height: 1.5rem;
+	}
+	#copyright{
+		font-size: 1.1rem;
+	}
+	#containerLandings{
+		margin-top: 80px;
+	}
+
+	#containerNeas{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		align-items: center;
+		margin: 0 10px;
+	}
+	#chart{
+		margin-top: 80px;
+		width: 50%;
+	}
+	#queriesNeas{
+		margin-top: 80px;
+	}
+
+	form, input{
+		font-size: 1.2rem;
+	}
+	#container_form{
+		margin-top: 60px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	#register_form> label, #register_form>input, #pass_container{
+		margin-bottom: 30px;
+	}
+	#register_form>input[type="submit"]{
+		margin-top: 30px;
+	}
+	
+	#admin_buttons, #container_users, #container_search{
+		width: 70%;
+	}
+	#form_search{
+		width: auto;
+	}
+	#showUser{
+		display: flex;
+		justify-content: center;
+
+	}
+	#container_users, #showUser, #amount_neas, #resultTable_neas{
+		font-size: 1.2rem;
+	}
+	#message{
+		font-size: 1.7rem;
+	}
+	
+}
+
+@media screen and (min-width: 1024px) {
+	  #map{
+		  height: 550px !important;
+	  }
+	  #filters{
+		  font-size: 1.3rem;
+	  }
+	
+	 
+	#resultTable_neas{
+		width: 90vw;
+	}
+	form, input{
+		font-size: 1.3rem;
+	}
+	form{
+		width: 70%;
+	}
+	#formClass, #formDate{
+		width: 100% ;
+	}
+	#container_users, #showUser, #amount_neas, #resultTable_neas{
+		font-size: 1.3rem;
+	}
+	#message{
+		font-size: 1.9rem;
+	}
+
+	
+}
+
+@media screen and (min-width: 1280px) {
+	
+	#map{
+		height: 600px !important;
+	}
+	form, input{
+		font-size: 1.4rem;
+	}
+	form{
+		width: 60%;
+	}
+	#container_users, #showUser, #amount_neas, #resultTable_neas{
+		font-size: 1.4rem;
+	}
+	#message{
+		font-size: 2.1rem;
+	}
+
+	
+	
+		
+  
+  }
+	@media screen and (min-width: 1920px) {
+		
+		#map{
+			height: 900px !important;
+		}
+		#containerNeas{
+
+			justify-content: space-around;
+		}
+		form, input{
+			font-size: 1.5rem;
+		}
+		form{
+			width: 50%;
+		}
+		#container_users, #showUser, #amount_neas, #resultTable_neas{
+			font-size: 1.5rem;
+		}
+
+
+  
+  }
+

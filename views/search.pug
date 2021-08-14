@@ -1,0 +1,78 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.")
+        style
+            include ../public/css/style.css
+            include ../public/css/menu.css
+        title Search
+    body
+        include ./header.pug
+        #container_form
+            #container_search
+                input(list='users' name='input_afNumber' id="input_afNumber")
+                datalist(id='users')
+                    each user in data
+                        option(value=user.afNumber)=user.afNumber
+                form(action="/api/astronomy/guild/details", method="post" id="form_search")
+                    input(type="hidden", name="afNumber", id="afNumber")
+                    input(type="hidden", name="token" value=token) 
+                    input(type="submit" value="Filter for afNumber" id="btn_afNumber" )
+                div#showUser
+                    if userDetails != undefined
+                        table#resultTable_search
+                                tr
+                                    th Af Number
+                                    td=userDetails[0].afNumber
+                                tr
+                                    th Name
+                                    td=userDetails[0].name
+                                tr
+                                    th Nickname
+                                    td=userDetails[0].nickname
+                                tr
+                                    - let age
+                                    -if (userDetails[0].birthdate){
+                                    -    let currentYear = new Date().getFullYear()
+                                    -    let birth = userDetails[0].birthdate.getFullYear()
+                                    -    age = currentYear - birth
+                                    -} else{
+                                    -   age = "no data"
+                                    -}
+                                    th Age
+                                    td #{age}
+                                tr
+                                    th Occupation
+                                    td=userDetails[0].occupation
+                                tr
+                                    th Af Date
+                                    td=userDetails[0].afDate
+                                tr
+                                    th To delete
+                                    td=userDetails[0].deleted
+                                tr
+                                    th Points
+                                    td=userDetails[0].astronomicalPoints
+                                tr
+                                    th NEAs discovered
+                                        each nea in userDetails[0].neasDiscovered
+                                            td=nea
+                                tr
+                                    th NECs discovered
+                                        each nec in userDetails[0].necsDiscovered
+                                            td=nec
+        script.
+            const input_afNumber = document.querySelector("#input_afNumber");
+            const btn_afNumber = document.querySelector("#btn_afNumber");
+            const afNumber = document.querySelector("#afNumber");
+
+            btn_afNumber.disabled = true;
+            input_afNumber.addEventListener("input", () => {
+                let regex = /^AFNUMBER-[0-9]{7}$/g
+                const search = input_afNumber.value;
+                search.match(regex) ? btn_afNumber.disabled = false :
+                                        btn_afNumber.disabled = true
+                afNumber.value = search;
+            });
