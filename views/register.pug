@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        script(src="https://kit.fontawesome.com/a5b1eae3e6.js" crossorigin="anonymous") 
+
+        style
+            include ../public/css/style.css
+            include ../public/css/menu.css
+        title Register
+    body
+        include ./header.pug
+        #container_form
+            form(id="register_form" action="http://localhost:3000/api/astronomy/guild", method="POST" autocomplete="off")
+                label(for="name") Name
+                input(type="text" name="name" id="name" required) 
+                label(for="nickname") Nickname
+                input(type="text" name="nickname" id="nickname" required) 
+                label(for="password") Password
+                #pass_container
+                    input(type="password" name="password" id="password" required) 
+                    i(id="togglePassword" class="fas fa-eye-slash")
+                label(for="birthdate") Birth
+                input(type="date" name="birthdate" id="birthdate")
+                label(for="occupation") Occupation
+                input(type="text" name="occupation" id="occupation")
+                input(type="hidden" name="afDate" id="afDate" value=Date.now())
+                input(type="hidden" name="deleted" id="deleted" value="false")
+                input(type="hidden" name="astronomicalPoints" id="astronomicalPoints" value=0)
+                input(type="hidden" name="token" id="token" value="")
+                input(type="submit", value="Register User")
+
+        script.
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#password');
+             
+            togglePassword.addEventListener('click', () => {
+
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            togglePassword.className == 'fas fa-eye-slash' ? togglePassword.className = 'fas fa-eye':
+                                                            togglePassword.className = 'fas fa-eye-slash'
+            });
+        

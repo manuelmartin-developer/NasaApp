@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='icon' href='/public/assets/favicon.ico')
+        style
+            include ../public/css/style.css
+            include ../public/css/menu.css
+        title NasaApp
+    body
+        include ./header.pug
+        div#dayimg
+            picture#apod
+                p#apodTitle=pictureObj.title
+                a(href=pictureObj.hdurl) 
+                    img(src=pictureObj.url, alt="nasa picture of the day")
+                p#apodExplanation=pictureObj.explanation
+                if pictureObj.copyright != undefined
+                    p#copyright=`© ${pictureObj.copyright}`
+                else
+                    p#copyright=`no data author`

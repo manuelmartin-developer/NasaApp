@@ -1,0 +1,35 @@
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title JS Asteroids Game
+  style
+        include ../public/css/asteroids.css
+        include ../public/css/menu.css
+  link(href='https://fonts.googleapis.com/css2?family=VT323&display=swap' rel='stylesheet')
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.13.1/css/all.css' integrity='sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q' crossorigin='anonymous')
+body
+    include ./header.pug
+main(tabindex='0')
+  canvas#gameCanvas(width='700' height='500')
+#instructions
+  .commands
+    kbd
+      i.fas.fa-arrow-up(aria-hidden='true' aria-label='up arrow key')
+    | propel the ship
+  .commands
+    kbd
+      i.fas.fa-arrow-left(aria-hidden='true' aria-label='left arrow key')
+    kbd
+      i.fas.fa-arrow-right(aria-hidden='true' aria-label='right arrow key')
+    | move the ship
+  .commands
+    kbd Space
+    | shoot lasers
+.volume
+  i#music.fas.fa-music.mute(aria-hidden='true' aria-label='sound off')
+  #sound
+    i.fas.fa-volume-mute(aria-hidden='true' aria-label='sound off')
+p#alert 404...upss! No computer...no party...
+script
+    include ../utils/asteroids.js
+    
