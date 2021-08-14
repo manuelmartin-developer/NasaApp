@@ -12,7 +12,7 @@ html(lang="en")
     body
         include ./header.pug
         #container_form
-            form(id="signin_form" action="http://localhost:3000/api/astronomy/guild/signin", method="POST" autocomplete="off")
+            form(id="signin_form" action="/api/astronomy/guild/signin", method="POST" autocomplete="off")
                 label(for="nickname") Nickname
                 input(type="text" name="nickname" id="nickname") 
                 label(for="password") Password

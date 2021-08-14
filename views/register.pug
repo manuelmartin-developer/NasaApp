@@ -13,7 +13,7 @@ html(lang="en")
     body
         include ./header.pug
         #container_form
-            form(id="register_form" action="http://localhost:3000/api/astronomy/guild", method="POST" autocomplete="off")
+            form(id="register_form" action="/api/astronomy/guild", method="POST" autocomplete="off")
                 label(for="name") Name
                 input(type="text" name="name" id="name" required) 
                 label(for="nickname") Nickname
