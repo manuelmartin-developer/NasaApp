@@ -16,39 +16,3 @@ const neasSchema = new mongoose.Schema({
 
 
 module.exports = mongoose.model('Nea', neasSchema, 'NEAs');
-
-
-
-
-
-
-designation
-    :
-    "419880 (2011 AH37)"
-discovery_date
-    :
-    "2011-01-07T00:00:00.000"
-h_mag
-    :
-    "19.7"
-moid_au
-    :
-    "0.035"
-q_au_1
-    :
-    "0.84"
-q_au_2
-    :
-    "4.26"
-period_yr
-    :
-    "4.06"
-i_deg
-    :
-    "9.65"
-pha
-    :
-    "Y"
-orbit_class
-    :
-    "Apollo"

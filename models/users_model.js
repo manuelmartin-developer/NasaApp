@@ -1,6 +1,6 @@
 const mongoose = require('../utils/db');
 const mongooseSerial = require("mongoose-serial")
-const connection = mongoose.createConnection(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
+const connection = mongoose.createConnection(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
 
 
 const usersSchema = new mongoose.Schema({
