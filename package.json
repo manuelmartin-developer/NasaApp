@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/manuelmartin-developer/NasaApp/issues"
   },
-  "homepage": "https://github.com/manuelmartin-developer/NasaApp#readme"
+  "homepage": "https://github.com/manuelmartin-developer/NasaApp#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongodb": "^4.1.0",
+    "mongoose": "^5.13.7",
+    "pug": "^3.0.2"
+  }
 }
