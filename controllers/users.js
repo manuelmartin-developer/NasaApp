@@ -5,6 +5,7 @@ const config = require("../config/auth.config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const storage = require('sessionstorage');
+const generateToken = require('../middlewares/generateToken');
 
 const db = require("../models/index_model");
 const Role = db.role;
@@ -51,16 +52,14 @@ const users = {
             const user = await User.findOne({
                 nickname: req.body.nickname
             })
-            let token = jwt.sign({
-                id: user.id
-            }, config.secret, {
-                expiresIn: 86400 // 24 hours
-            });
-            storage.setItem('token', token)
+            const id = user.id
+            const nickname = user.nickname
+
+            await generateToken(res ,id, nickname);
+
             res.status(200).render('userdashboard', {
                 jsStringify,
-                user,
-                token
+                user
             });
 
         } catch (error) {
@@ -72,10 +71,8 @@ const users = {
     },
     admindashboard: async (req, res) => {
         try {
-            const token = storage.getItem('token');
             res.status(200).render('admindashboard', {
                 jsStringify,
-                token
             });
         } catch (error) {
             res.status(400).json({
@@ -86,11 +83,11 @@ const users = {
     search: async (req, res) => {
         try {
             let data = await User.find();
-            const token = storage.getItem('token');
+
             res.status(200).render('search', {
                 jsStringify,
                 data,
-                token
+
             });
         } catch (error) {
             res.status(400).json({
@@ -184,7 +181,6 @@ const users = {
         try {
             const data = await User.find();
             const afNumber = await req.body.afNumber;
-            const token = storage.getItem('token');
             const userDetails = await User.find({})
                 .where({
                     'afNumber': afNumber
@@ -193,7 +189,6 @@ const users = {
                 jsStringify,
                 data,
                 userDetails,
-                token
             });
         } catch (error) {
             res.status(400).json({
@@ -209,10 +204,8 @@ const users = {
                 .where({
                     'afNumber': param
                 })
-                const token = storage.getItem('token');
             res.status(200).render('edituser', {
                 jsStringify,
-                token,
                 user
             });
         } catch (error) {
@@ -277,9 +270,7 @@ const users = {
         });
         if (userToDelete.deleted === true) {
             try {
-                
-                const token = storage.getItem('token');
-                const deletedUser = await User.findOneAndDelete({
+                    const deletedUser = await User.findOneAndDelete({
                     afNumber: afNumber
                 })
                 const message = `User with # ${afNumber} has been deleted`;

@@ -22,12 +22,10 @@ html(lang="en")
                 input(type="text" name="occupation" id="input_occupation" value=user[0].occupation)
                 label(for="points") Set Astronomical Points
                 input(type="number" name="astronomicalPoints" id="input_points" value=user[0].astronomicalPoints)
-                input(type="hidden", name="token" value=token)
                 input(type="submit", value="Save Changes" id="btn_save")
             form(id="edit_delete" method="POST", action=`/api/astronomy/guild/${user[0].afNumber}/delete?_method=PUT`)
                 label(for="delete" id="label_delete") Do you want to delete your account?
                 input(type="checkbox", name="delete" id="check_delete")
-                input(type="hidden", name="token" value=token)
                 input(type="submit", value="Delete Account" id="btn_delete")
         #goBack
             button(onclick="window.history.back()") Go Back

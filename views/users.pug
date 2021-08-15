@@ -24,7 +24,6 @@ html(lang="en")
                             #buttons
                                 a(href=`/edit/${user.afNumber}`, target="_self", rel="noopener noreferrer" class="far fa-edit")
                                 form(method="POST", action=`/api/astronomy/guild/${user.afNumber}?_method=DELETE`)
-                                    input(type="hidden", name="token" value=token)
                                     button(type="submit" class="far fa-trash-alt" id=user.afNumber)
                         hr
                 input#btn_goback(type="button", value="Go back" onclick="window.history.back()")

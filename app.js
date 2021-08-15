@@ -1,6 +1,7 @@
 const express = require('express');
 const favicon = require('serve-favicon');
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const router_home = require('./routes/router_home')
 const router_api = require('./routes/router_api')
@@ -12,10 +13,14 @@ const app = express();
 const port = process.env.PORT;
 
 const corsOptions = {
-  origin: "http://localhost:process.env.PORT"
+  origin: [
+  "http://localhost:process.env.PORT",
+  "https://still-waters-81962.herokuapp.com/"
+    ]
 };
 
 app.use(cors(corsOptions));
+app.use(cookieParser());
 
 
 app.use("/public", express.static(path.join(__dirname, 'public')));

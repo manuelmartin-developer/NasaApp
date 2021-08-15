@@ -20,11 +20,12 @@ nav(role='navigation')
     let liSign = document.querySelector('#liSign');
     let aSign = document.querySelector('#aSign');
 
-    if(sessionStorage.getItem('token')){
+
+    if(sessionStorage.getItem('logged')){
       liSign.innerHTML = "Log Out"
       aSign.href ="/"
       aSign.addEventListener('click', () => {
-        sessionStorage.removeItem('token');
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";        sessionStorage.removeItem('logged');
         });
     }else{
       liSign.innerHTML = "Sign In"

@@ -7,7 +7,7 @@ const User = require('../models/users_model');
 
 verifyToken = (req, res, next) => {
 
-  let token = req.body.token || req.headers["x-access-token"];
+  const token = req.cookies.token || req.headers["x-access-token"];
 
   if (!token) {
     const message = `No Token`;

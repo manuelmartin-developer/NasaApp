@@ -18,7 +18,6 @@ html(lang="en")
                         option(value=user.afNumber)=user.afNumber
                 form(action="/api/astronomy/guild/details", method="post" id="form_search")
                     input(type="hidden", name="afNumber", id="afNumber")
-                    input(type="hidden", name="token" value=token) 
                     input(type="submit" value="Filter for afNumber" id="btn_afNumber" )
                 div#showUser
                     if userDetails != undefined

@@ -32,15 +32,12 @@ html(lang="en")
             form(id="edit_delete" method="POST", action=`/api/astronomy/guild/${user.afNumber}/delete?_method=PUT`)
                 label(for="delete" id="label_delete") Do you want to delete your account?
                 input(type="checkbox", name="delete" id="check_delete")
-                input(type="hidden", name="token" value=token)
                 input(type="submit", value="Delete Account" id="btn_delete")
             form(action="/api/auth/dashboard", method="post" id="admin_panel")
-                input(type="hidden", name="token" value=token)
                 input(type="submit", value="Admin Panel" id="btn_admin_panel")
         script.
             const user = !{jsStringify(user)};
-            const token = !{jsStringify(token)};
-            sessionStorage.setItem('token', token);
+            sessionStorage.setItem('logged', true);
 
             const nickname = document.querySelector("#input_nickname");
             const occupation = document.querySelector("#input_occupation");
