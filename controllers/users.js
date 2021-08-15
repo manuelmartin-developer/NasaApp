@@ -14,11 +14,9 @@ const users = {
 
     users: async (req, res) => {
         try {
-            const token = storage.getItem('token');
             const data = await User.find();
             res.status(200).render('users', {
                 jsStringify,
-                token,
                 data
             });
         } catch (error) {
