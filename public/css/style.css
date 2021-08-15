@@ -473,14 +473,7 @@ th{color: orange;}
 		display: block;
 	}
   }
-  @media only screen and (max-width:768px) {
-	#portrait {
-		display: none;
-	  }
-	  #containerLandings{
-		  display: block;
-	  }
-  }
+
   /* MEDIA QUERIES */
 @media screen and (min-width: 768px) {
 
