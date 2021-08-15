@@ -489,7 +489,7 @@ th{color: orange;}
 		font-size: 1.1rem;
 	}
 	#containerLandings{
-		margin-top: 80px;
+		margin-top: 40px;
 	}
 
 	#containerNeas{
@@ -548,10 +548,12 @@ th{color: orange;}
 	  #map{
 		  height: 550px !important;
 	  }
+	  #containerLandings{
+		margin-top: 80px;
+	}
 	  #filters{
 		  font-size: 1.3rem;
 	  }
-	
 	 
 	#resultTable_neas{
 		width: 90vw;
