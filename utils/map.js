@@ -23,7 +23,7 @@ navigator.geolocation.watchPosition((position) => {
     L.marker(initialCoordinates)
         .bindPopup("<b>You are here!</b>")
         .addTo(map);
-    
+
     let LeafIcon = L.Icon.extend({
       options: {
         iconSize: [30, 30],
@@ -32,10 +32,23 @@ navigator.geolocation.watchPosition((position) => {
       }
     });
 
+    
     let landingIcon = new LeafIcon({
-                iconUrl: '/public/assets/landing_icon.png'
+        iconUrl: '/public/assets/landing_icon.png'
     });
     let landingsLayer = L.layerGroup().addTo(map);
+    let issIcon = new LeafIcon({
+                iconUrl: '/public/assets/death_star.png'
+    });
+    const issCords = [parseFloat(iss.latitude), parseFloat(iss.longitude)];
+    const issVelocity = iss.velocity.toFixed(2)
+    const issAltitude = iss.altitude.toFixed(2)
+    L.marker(issCords,{
+        icon: issIcon
+    })
+    .bindPopup(`<b>International Space Station</b><br><b>Velocity</b> ${issVelocity} km/h<br><b>Altitude</b> ${issAltitude} km`)
+    .addTo(landingsLayer);
+
     for (let landing of data) {
     const landingCords = [parseFloat(landing.reclat), parseFloat(landing.reclong)];
     L.marker(landingCords, {
