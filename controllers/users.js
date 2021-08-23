@@ -4,6 +4,7 @@ const config = require("../config/auth.config");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+'use strict';
 const storage = require('sessionstorage');
 const generateToken = require('../middlewares/generateToken');
 
@@ -53,13 +54,46 @@ const users = {
             const id = user.id
             const nickname = user.nickname
 
-            await generateToken(res ,id, nickname);
-
+            await generateToken(res, id, nickname);
+            storage.setItem('logged', true);
             res.status(200).render('userdashboard', {
                 jsStringify,
                 user
             });
 
+        } catch (error) {
+            res.status(400).json({
+                error: error.message
+            });
+        }
+
+    },
+    logout: async (req, res) => {
+        try {
+
+            const token = req.cookies.token;
+            jwt.sign(token, "", {
+                expires: 1
+            }, (logout, err) => {
+                if (logout) {
+                    res.cookie('token', token, {
+                        expires: new Date(Date.now()),
+                        secure: false,
+                        httpOnly: true,
+                    });
+                    storage.removeItem('logged');
+                    const message = `You have been Logged Out`
+                    const href = "location.href='/'";
+                    res.status(201).render('message', {
+                        message,
+                        href,
+                    });
+                } else {
+                    res.send({
+                        msg: 'Error'
+                    });
+                }
+            });
         } catch (error) {
             res.status(400).json({
                 error: error.message
@@ -96,78 +130,89 @@ const users = {
     },
     signUp: async (req, res) => {
         try {
-        const user = await new User({
-            name: req.body.name,
-            nickname: req.body.nickname,
-            password: bcrypt.hashSync(req.body.password, 8),
-            birthdate: req.body.birthdate,
-            occupation: req.body.occupation,
-            afDate: req.body.afDate,
-            deleted: req.body.deleted,
-            astronomicalPoints: req.body.astronomicalPoints
-        });
+            const user = await new User({
+                name: req.body.name,
+                nickname: req.body.nickname,
+                password: bcrypt.hashSync(req.body.password, 8),
+                birthdate: req.body.birthdate,
+                occupation: req.body.occupation,
+                afDate: req.body.afDate,
+                deleted: req.body.deleted,
+                astronomicalPoints: req.body.astronomicalPoints
+            });
 
             if (req.body.roles) {
-                Role.find(
-                    {
-                        name: { $in: req.body.roles }
+                Role.find({
+                        name: {
+                            $in: req.body.roles
+                        }
                     },
                     (err, roles) => {
                         if (err) {
-                            res.status(500).send({ message: err });
+                            res.status(500).send({
+                                message: err
+                            });
                             return;
                         }
-                        
+
                         user.roles = roles.map(role => role._id);
                         user.save(err => {
                             if (err) {
-                                res.status(500).send({ message: err });
+                                res.status(500).send({
+                                    message: err
+                                });
                                 return;
                             }
-                            
-                        const newUser = user.save();
-                        const message = `Congratulations ${newUser.name}!\\ You are in our team!\
+
+                            const newUser = user.save();
+                            const message = `Congratulations ${newUser.name}!\\ You are in our team!\
                         Now you can access to your account , remember your affiliated number
                         ${newUser.afNumber}`
-                        const href = "location.href='/'";
-                        res.status(201).render('message', {
-                        jsStringify,
-                        newUser,
-                        message,
-                        href
-                    });
-                      });
+                            const href = "location.href='/'";
+                            res.status(201).render('message', {
+                                jsStringify,
+                                newUser,
+                                message,
+                                href
+                            });
+                        });
                     }
-                  );
-                }else {
-                  Role.findOne({ name: "user" }, (err, role) => {
+                );
+            } else {
+                Role.findOne({
+                    name: "user"
+                }, (err, role) => {
                     if (err) {
-                      res.status(500).send({ message: err });
-                      return;
+                        res.status(500).send({
+                            message: err
+                        });
+                        return;
                     }
-            
+
                     user.roles = [role._id];
                     user.save(err => {
-                      if (err) {
-                        res.status(500).send({ message: err });
-                        return;
-                      }
-            
-                      const newUser = user.save();
-                      const message = `Congratulations ${user.name}! You are in our team!
+                        if (err) {
+                            res.status(500).send({
+                                message: err
+                            });
+                            return;
+                        }
+
+                        const newUser = user.save();
+                        const message = `Congratulations ${user.name}! You are in our team!
                       Now you can access to your account , remember your affiliated number
                       ${user.afNumber}`
-                  const href = "location.href='/'";
-                  res.status(201).render('message', {
-                      jsStringify,
-                      newUser,
-                      message,
-                      href
-                  });
+                        const href = "location.href='/'";
+                        res.status(201).render('message', {
+                            jsStringify,
+                            newUser,
+                            message,
+                            href
+                        });
                     });
-                  });
-                }  
-           
+                });
+            }
+
         } catch (error) {
             res.status(400).json({
                 error: error.message
@@ -268,7 +313,7 @@ const users = {
         });
         if (userToDelete.deleted === true) {
             try {
-                    const deletedUser = await User.findOneAndDelete({
+                const deletedUser = await User.findOneAndDelete({
                     afNumber: afNumber
                 })
                 const message = `User with # ${afNumber} has been deleted`;

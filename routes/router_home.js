@@ -16,6 +16,7 @@ router.get('/neas', neas.getNeas)
 //Users
 router.get('/register', users.register);
 router.get('/signin', users.signinPage);
+router.get('/logout', users.logout);
 router.get('/edit/:afNumber', users.editUser);
 
 module.exports = router;

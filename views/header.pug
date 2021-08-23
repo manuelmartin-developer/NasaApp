@@ -23,14 +23,14 @@ nav(role='navigation')
 
     if(sessionStorage.getItem('logged')){
       liSign.innerHTML = "Log Out"
-      aSign.href ="/"
+      aSign.href ="/logout"
       aSign.addEventListener('click', () => {
-      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";        sessionStorage.removeItem('logged');
+        sessionStorage.removeItem('logged');
         });
     }else{
       liSign.innerHTML = "Sign In"
       aSign.href ="/signin"
-    }
+      }
 
    
 
