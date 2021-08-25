@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css', integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==', crossorigin='')
+        link(rel='icon' href='/public/assets/favicon.ico')
+        style
+            include ../public/css/style.css
+            include ../public/css/menu.css
+        script(src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js")
+        title Mars
+    body
+        include ./header.pug
+        #containerMars 
+            #map
+            span Latest photos of Perseverance
+            #latest_photos
+                each photo in photos.latest_photos
+                    a(href=photo.img_src, target="_blank", rel="noopener noreferrer") 
+                        img(src=photo.img_src, alt="perseverande_photo")
+    
+        script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==', crossorigin='')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet-realtime/2.2.0/leaflet-realtime.min.js', crossorigin='')
+        script.
+            const data = !{jsStringify(data)};
+        script(src="/utils/map_mars.js")

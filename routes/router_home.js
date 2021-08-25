@@ -3,6 +3,7 @@ const home = require('../controllers/home');
 const users = require('../controllers/users');
 const landings = require('../controllers/landings')
 const neas = require('../controllers/neas')
+const mars = require('../controllers/mars')
 
 // Home
 router.get('', home.home)
@@ -12,6 +13,9 @@ router.get('/landings', landings.getAllLandings)
 
 // NEAs
 router.get('/neas', neas.getNeas)
+
+// Mars
+router.get('/mars', mars.home)
 
 //Users
 router.get('/register', users.register);

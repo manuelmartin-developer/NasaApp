@@ -1,3 +1,4 @@
+/* GLOBAL */
 *{
 	padding: 0;
 	margin: 0;
@@ -9,6 +10,10 @@ body{
 }
 form>label{
 	color: orange;
+}
+#map{
+	width: 100%;
+	height: 300px;	
 }
 /* HOME */
 #apodTitle{
@@ -47,6 +52,10 @@ form>label{
 	line-height: 1.3rem;
 	
 }
+span{
+	color: orange;
+	font-weight: bold;
+}
 #copyright{
 	text-align: left;
 	font-style: italic;
@@ -56,31 +65,34 @@ form>label{
 }
 /* LANDINGS */
 #containerLandings{
-	width: 100vw;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	display: none;
+
 }
+
 #filters{
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
 	flex-wrap: nowrap;
-	justify-content: space-around;
 	height: 20vh;
 	margin: 0 10px;
 }
 #landings_info{
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+}
+#btn_reset{
+	margin-left: 10px;
 }
 #queriesLandings{
 	display: flex;
 	flex-direction: row;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
 	margin-left: 10px;
@@ -126,50 +138,11 @@ input[type=number]:focus, input[list]:focus, input[type=date]:focus, input[type=
 
 #amount_landings{
 	color: rgba(193,193,193,1.00);
+	margin-top: 10px;
 	margin-bottom: 10px;
 }
-span{
-	color: orange;
-	font-weight: bold;
-}
-#portrait {
-    background: rgba(44,44,44,1.00);
-    height: 100vh ;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
 
-  .phone {
-    height: 200px;
-    width: 400px;
-    border: 3px solid rgba(193,193,193,1.00);
-    border-radius: 10px;
-    margin-bottom: 80px;
-    animation: rotate 1.5s ease-in-out infinite alternate;
-  }
-  
-  .message {
-    color: rgba(193,193,193,1.00);
-    font-size: 2.5rem;
-    margin-top: 40px;
 
-  }
-  
-  @keyframes rotate {
-    0% {
-          transform: rotate(0deg)
-      }
-      50% {
-          transform: rotate(-90deg)
-      }
-      100% {
-          transform: rotate(-90deg)
-      }
-  }
   
 /* NEAs */
 #containerNeas{
@@ -178,7 +151,8 @@ span{
 	flex-wrap: nowrap;
 	justify-content: center;
 	align-items: center;
-	margin: 0 10px;
+	margin:0 10px ;
+
 }
 #neas_info{
 	display: flex;
@@ -248,6 +222,38 @@ th{color: orange;}
 	background-color: rgba(193,193,193,1.00);
 	color: black;
 }
+
+/* MARS */
+#containerMars{
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#containerMars>span{
+	margin-top: 30px;
+}
+#latest_photos{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 100%;
+	margin-top: 30px;
+}
+
+#latest_photos>a>img{
+	height: 65px;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+#latest_photos>a>img:hover{
+	-webkit-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
 /* USERS */
 #amount_users{
 	color: rgba(193,193,193,1.00);
@@ -465,19 +471,8 @@ th{color: orange;}
 }
 
 
-
-/******************* MEDIA QUERIES**********************/
-  @media only screen and (min-width: 768px) and (orientation: landscape) {
-    #portrait {
-      display: none;
-    }
-	#containerLandings{
-		display: block;
-	}
-  }
-
   /* MEDIA QUERIES */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
 
 	#apodTitle{
 		font-size: 1.5rem;
@@ -492,6 +487,14 @@ th{color: orange;}
 	}
 	#containerLandings{
 		margin-top: 40px;
+	}
+	#queriesLandings{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: center;
+
 	}
 
 	#containerNeas{
@@ -508,6 +511,11 @@ th{color: orange;}
 	}
 	#queriesNeas{
 		margin-top: 80px;
+	}
+	#latest_photos>a>img{
+		height: 180px;
+		-webkit-transition: .3s ease-in-out;
+		transition: .3s ease-in-out;
 	}
 
 	form, input{
@@ -550,7 +558,7 @@ th{color: orange;}
 	  #map{
 		  height: 550px !important;
 	  }
-	  #containerLandings{
+	  #containerLandings, #containerMars{
 		margin-top: 80px;
 	}
 	  #filters{
@@ -590,6 +598,17 @@ th{color: orange;}
 	form{
 		width: 60%;
 	}
+	#landings_info{
+		margin: 30px 0;
+	}
+	#containerMars>span{
+		font-size: 1.3rem;
+	}
+	#latest_photos>a>img{
+		height: 250px;
+		-webkit-transition: .3s ease-in-out;
+		transition: .3s ease-in-out;
+	}
 	#container_users, #showUser, #amount_neas, #resultTable_neas{
 		font-size: 1.4rem;
 	}
@@ -611,12 +630,18 @@ th{color: orange;}
 
 			justify-content: space-around;
 		}
+		#latest_photos>a>img{
+			height: 340px;
+			-webkit-transition: .3s ease-in-out;
+			transition: .3s ease-in-out;
+		}
 		form, input{
 			font-size: 1.5rem;
 		}
 		form{
 			width: 50%;
 		}
+		
 		#container_users, #showUser, #amount_neas, #resultTable_neas{
 			font-size: 1.5rem;
 		}

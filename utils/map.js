@@ -2,7 +2,7 @@ navigator.geolocation.watchPosition((position) => {
 
     const mapId = "map";
     const initialCoordinates = [position.coords.latitude, position.coords.longitude];
-    const map = L.map(mapId, { maxZoom: 20, minZoom: 2, zoomControl: false }).setView(initialCoordinates, 5);
+    const map = L.map(mapId, { maxZoom: 20, minZoom: 1, zoomControl: false }).setView(initialCoordinates, 5);
 
     const MAPBOX_API =
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}";
@@ -38,7 +38,7 @@ navigator.geolocation.watchPosition((position) => {
     });
     let landingsLayer = L.layerGroup().addTo(map);
     let issIcon = new LeafIcon({
-                iconUrl: '/public/assets/death_star.png'
+                iconUrl: '/public/assets/iss.png'
     });
     const issCords = [parseFloat(iss.latitude), parseFloat(iss.longitude)];
     const issVelocity = iss.velocity.toFixed(2)
