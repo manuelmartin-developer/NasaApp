@@ -46,40 +46,47 @@ const neas = {
                         error: error.message
                     });
                 }
-            }else if (queries.from && queries.to){
+            } else if (queries.from && queries.to) {
                 let queryFrom = await queries.from;
                 let queryTo = await queries.to;
                 let data = await Nea.find({})
-                            .where({
-                                'discovery_date': { $gte: queryFrom, $lte: queryTo }
-                            })
-                        res.status(200).render('neas', {
-                            jsStringify,
-                            data
-                        })
-            }else if(queries.from){
+                    .where({
+                        'discovery_date': {
+                            $gte: queryFrom,
+                            $lte: queryTo
+                        }
+                    })
+                res.status(200).render('neas', {
+                    jsStringify,
+                    data
+                })
+            } else if (queries.from) {
                 let queryFrom = await queries.from;
                 let queryTo = await queries.to;
                 let data = await Nea.find({})
-                            .where({
-                                'discovery_date': { $gte: queryFrom }
-                            })
-                        res.status(200).render('neas', {
-                            jsStringify,
-                            data
-                        })
-                
-            }else if(queries.to){
+                    .where({
+                        'discovery_date': {
+                            $gte: queryFrom
+                        }
+                    })
+                res.status(200).render('neas', {
+                    jsStringify,
+                    data
+                })
+
+            } else if (queries.to) {
                 let queryFrom = await queries.from;
                 let queryTo = await queries.to;
                 let data = await Nea.find({})
-                            .where({
-                                'discovery_date': { $lte: queryTo }
-                            })
-                        res.status(200).render('neas', {
-                            jsStringify,
-                            data
-                        })
+                    .where({
+                        'discovery_date': {
+                            $lte: queryTo
+                        }
+                    })
+                res.status(200).render('neas', {
+                    jsStringify,
+                    data
+                })
             }
         } catch (error) {
             res.status(400).json({

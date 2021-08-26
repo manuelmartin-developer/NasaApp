@@ -14,24 +14,26 @@ const port = process.env.PORT;
 
 const corsOptions = {
   origin: [
-  "http://localhost:process.env.PORT",
-  "https://still-waters-81962.herokuapp.com/"
-    ]
+    "http://localhost:process.env.PORT",
+    "https://still-waters-81962.herokuapp.com/"
+  ]
 };
 
+//Middlewares
 app.use(cors(corsOptions));
 app.use(cookieParser());
-
 
 app.use("/public", express.static(path.join(__dirname, 'public')));
 app.use("/utils", express.static(path.join(__dirname, 'utils')));
 
 //View engine
 app.set('view engine', 'pug');
-app.set('views','./views');
+app.set('views', './views');
 
 //Middlewares
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(express.json());
 app.use(methodOverride('_method'))
 app.use(favicon(__dirname + '/public/assets/favicon.ico'));
@@ -41,11 +43,11 @@ app.use('/', router_home);
 app.use('/api', router_api);
 
 
-app.get('*',  (req, res) => {
-    res.status(404).render('404')
-  });
+app.get('*', (req, res) => {
+  res.status(404).render('404')
+});
 
 
 app.listen(port, () => {
-    console.log(`Server listen at http://localhost:${port}`);
+  console.log(`Server listen at http://localhost:${port}`);
 });

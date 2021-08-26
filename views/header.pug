@@ -13,6 +13,8 @@ nav(role='navigation')
         li NEAs
       a(href='/mars')
         li Mars
+      a(href='/moon')
+        li Moon
       hr
       a(href='/register')
         li Register
@@ -22,7 +24,6 @@ nav(role='navigation')
 
     let liSign = document.querySelector('#liSign');
     let aSign = document.querySelector('#aSign');
-
 
     if(sessionStorage.getItem('logged')){
       liSign.innerHTML = "Log Out"

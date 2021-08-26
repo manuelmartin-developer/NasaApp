@@ -1,0 +1,53 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css', integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==', crossorigin='')
+        link(rel='icon' href='/public/assets/favicon.ico')
+        style
+            include ../public/css/style.css
+            include ../public/css/menu.css
+        script(src="https://kit.fontawesome.com/a5b1eae3e6.js" crossorigin="anonymous") 
+        script(src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js")
+        title Moon
+    body
+        include ./header.pug
+        #containerMoon 
+            #map
+            span Select an album from an Apollo mission
+            form(action='/moon' method='GET' id="search_album")
+                input(id='input_mission' list='mission' name='mission')
+                datalist(id='mission')
+                    option(value=11)='Apollo XI'
+                    option(value=12)='Apollo XII'
+                    option(value=14)='Apollo XIV'
+                    option(value=15)='Apollo XV'
+                    option(value=16)='Apollo XVI'
+                    option(value=17)='Apollo XVII'
+                input(type='submit' value='Get Album' id="btn_album")
+            #apollo_photos
+                each photo in photos.collection.items
+                    a(href=photo.links[0].href, target="_blank", rel="noopener noreferrer") 
+                        img(src=photo.links[0].href, alt="apollo_missions_photo")
+            button(onclick="topFunction()" id="btn_top")
+                i(class="fas fa-chevron-circle-up")
+    
+        script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==', crossorigin='')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet-realtime/2.2.0/leaflet-realtime.min.js', crossorigin='')
+        script(src="/utils/top_button.js")
+        script(src="/utils/map-moon.js")
+        script.
+            const input_mission = document.querySelector("#input_mission");
+            const btn_album = document.querySelector("#btn_album");
+            const mission = document.querySelector("#mission");
+
+            btn_album.disabled = true;
+            input_mission.addEventListener("input", () => {
+                let regex = /[11|12|14|15|16|17]$/g
+                const search = input_mission.value;
+                search.match(regex) ? btn_album.disabled = false :
+                                        btn_album.disabled = true
+                mission.value = search;
+            });

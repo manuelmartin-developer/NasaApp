@@ -11,7 +11,7 @@ html(lang="en")
         title NasaApp
     body
         include ./header.pug
-        div#dayimg
+        #dayimg
             picture#apod
                 p#apodTitle=pictureObj.title
                 a(href=pictureObj.hdurl) 
@@ -21,3 +21,4 @@ html(lang="en")
                     p#copyright=`© ${pictureObj.copyright}`
                 else
                     p#copyright=`no data author`
+

@@ -1,6 +1,11 @@
 const mongoose = require('../utils/db');
 const mongooseSerial = require("mongoose-serial")
-const connection = mongoose.createConnection(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
+const connection = mongoose.createConnection(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+});
 
 
 const usersSchema = new mongoose.Schema({
@@ -18,12 +23,10 @@ const usersSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    roles: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Role"
-        }
-      ],
+    roles: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Role"
+    }],
     afNumber: {
         type: String
     },
@@ -48,12 +51,17 @@ const usersSchema = new mongoose.Schema({
     necsDiscovered: {
         type: Array
     },
-    token:{
+    token: {
         type: String
     }
 });
 
 let Invoice = connection.model('User', usersSchema, 'Users');
-usersSchema.plugin(mongooseSerial, { field:"afNumber", prefix:"AFNUMBER", separator: "-", digits:7});
+usersSchema.plugin(mongooseSerial, {
+    field: "afNumber",
+    prefix: "AFNUMBER",
+    separator: "-",
+    digits: 7
+});
 
 module.exports = mongoose.model('User', usersSchema, 'Users');

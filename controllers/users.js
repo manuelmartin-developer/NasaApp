@@ -1,10 +1,8 @@
 const jsStringify = require('js-stringify');
 const User = require('../models/users_model');
-const config = require("../config/auth.config");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-'use strict';
 const storage = require('sessionstorage');
 const generateToken = require('../middlewares/generateToken');
 
@@ -166,7 +164,7 @@ const users = {
 
                             const newUser = user.save();
                             const message = `Congratulations ${newUser.name}!\\ You are in our team!\
-                        Now you can access to your account , remember your affiliated number
+                        Now you can access to your account, remember your affiliated number
                         ${newUser.afNumber}`
                             const href = "location.href='/'";
                             res.status(201).render('message', {

@@ -3,52 +3,52 @@ const bcrypt = require("bcryptjs");
 
 checkNicknameAndPassword = (req, res, next) => {
     User.findOne({
-        nickname: req.body.nickname
-    })
-    .populate("roles", "-__v")
-    .exec((err, user) => {
-        if (err) {
-            res.status(500).send({
-                message: err
-            });
-            return;
-        }
+            nickname: req.body.nickname
+        })
+        .populate("roles", "-__v")
+        .exec((err, user) => {
+            if (err) {
+                res.status(500).send({
+                    message: err
+                });
+                return;
+            }
 
-        if (!user) {
-            const message = `That nickname does not exist in our database`;
-            const href = "location.href='/signin'";
-            return res.status(404).render('message', {
-                message,
-                href
-            });
-        }
+            if (!user) {
+                const message = `That nickname does not exist in our database`;
+                const href = "location.href='/signin'";
+                return res.status(404).render('message', {
+                    message,
+                    href
+                });
+            }
 
-        let passwordIsValid = bcrypt.compareSync(
-            req.body.password,
-            user.password
-        );
+            let passwordIsValid = bcrypt.compareSync(
+                req.body.password,
+                user.password
+            );
 
-        if (!passwordIsValid) {
+            if (!passwordIsValid) {
 
-            const message = `Invalid password!`;
-            const href = "location.href='/signin'";
-            return res.status(404).render('message', {
-                message,
-                href
-            });
-        }
+                const message = `Invalid password!`;
+                const href = "location.href='/signin'";
+                return res.status(404).render('message', {
+                    message,
+                    href
+                });
+            }
 
-        let authorities = [];
+            let authorities = [];
 
-        for (let i = 0; i < user.roles.length; i++) {
-            authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
-        }
+            for (let i = 0; i < user.roles.length; i++) {
+                authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
+            }
 
-        next();
-    });
+            next();
+        });
 };
 const verifySignIn = {
     checkNicknameAndPassword
-  };
-  
-  module.exports = verifySignIn;
+};
+
+module.exports = verifySignIn;
