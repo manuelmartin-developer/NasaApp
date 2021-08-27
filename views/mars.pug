@@ -16,7 +16,9 @@ html(lang="en")
         include ./header.pug
         #containerMars 
             #map
-            span Latest photos of Perseverance
+            p#album_title
+                |Latest photos of Perseverance 
+                span=photos.latest_photos[0].earth_date
             #latest_photos
                 each photo in photos.latest_photos
                     a(href=photo.img_src, target="_blank", rel="noopener noreferrer") 

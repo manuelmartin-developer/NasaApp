@@ -310,7 +310,11 @@ th {
 #containerMars>span {
 	margin-top: 30px;
 }
-
+#album_title{
+	margin-top: 30px;
+	color: rgba(193, 193, 193, 1.00);
+	font-weight: bold;
+}
 #latest_photos {
 	display: flex;
 	flex-direction: row;
@@ -727,7 +731,9 @@ th {
 	#message {
 		font-size: 1.7rem;
 	}
-
+	#album_title{
+		font-size: 1.3rem;
+	}
 }
 
 @media screen and (min-width: 1024px) {
