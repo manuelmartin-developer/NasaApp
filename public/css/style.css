@@ -310,21 +310,48 @@ th {
 #containerMars>span {
 	margin-top: 30px;
 }
-#album_title{
+#album_perseverance_title{
 	margin-top: 30px;
 	color: rgba(193, 193, 193, 1.00);
 	font-weight: bold;
 }
-#latest_photos {
+#latest_perseverance_photos {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	flex-wrap: wrap;
 	width: 90%;
 	margin-top: 30px;
+	display: none;
 }
 
-#latest_photos>a>img {
+#latest_perseverance_photos>a>img {
+	width: 100%;
+	object-fit: scale-down;
+	
+}
+#btn_perseverance_album{
+	margin-top: 10px;
+}
+#album_curiosity_title{
+	margin-top: 30px;
+	color: rgba(193, 193, 193, 1.00);
+	font-weight: bold;
+}
+#btn_curiosity_album{
+	margin-top: 10px;
+}
+#latest_curiosity_photos {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 90%;
+	margin-top: 30px;
+	display: none;
+}
+
+#latest_curiosity_photos>a>img {
 	width: 100%;
 	object-fit: scale-down;
 
@@ -731,7 +758,10 @@ th {
 	#message {
 		font-size: 1.7rem;
 	}
-	#album_title{
+	#album_perseverance_title{
+		font-size: 1.3rem;
+	}
+	#album_curiosity_title{
 		font-size: 1.3rem;
 	}
 }
@@ -764,12 +794,21 @@ th {
 		width: 70%;
 	}
 
-	#latest_photos>a>img {
+	#latest_perseverance_photos>a>img {
 		-webkit-transition: .3s ease-in-out;
 		transition: .3s ease-in-out;
 	}
 
-	#latest_photos>a>img:hover {
+	#latest_perseverance_photos>a>img:hover {
+		-webkit-transform: scale(1.1);
+		transform: scale(1.1);
+	}
+	#latest_curiosity_photos>a>img {
+		-webkit-transition: .3s ease-in-out;
+		transition: .3s ease-in-out;
+	}
+
+	#latest_curiosity_photos>a>img:hover {
 		-webkit-transform: scale(1.1);
 		transform: scale(1.1);
 	}
@@ -835,7 +874,10 @@ th {
 		font-size: 1.3rem;
 	}
 
-	#latest_photos>a>img {
+	#latest_perseverance_photos>a>img {
+		height: 250px;
+	}
+	#latest_curiosity_photos>a>img {
 		height: 250px;
 	}
 
@@ -865,7 +907,12 @@ th {
 		justify-content: space-around;
 	}
 
-	#latest_photos>a>img {
+	#latest_perseverance_photos>a>img {
+		height: 400px;
+		-webkit-transition: .3s ease-in-out;
+		transition: .3s ease-in-out;
+	}
+	#latest_curiosity_photos>a>img {
 		height: 400px;
 		-webkit-transition: .3s ease-in-out;
 		transition: .3s ease-in-out;

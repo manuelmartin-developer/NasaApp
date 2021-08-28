@@ -1,7 +1,10 @@
 * {
   font-family: monospace;
 }
+#author{
 
+  opacity: 0.60;
+}
 #menuToggle {
   display: block;
   position: relative;

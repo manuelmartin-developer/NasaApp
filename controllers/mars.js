@@ -6,13 +6,17 @@ const curiosity = require('../utils/curiosity');
 const mars = {
     home: async (req, res) => {
         try {
-            const photos = await perseverance.getPerseverancePhotos();
-            const data = await perseverance.getPerseveranceData();
+            const perseverancePhotos = await perseverance.getPerseverancePhotos();
+            const curiosityPhotos = await curiosity.getCuriosityPhotos();
+            const perseveranceData = await perseverance.getPerseveranceData();
+            const curiosityData = await curiosity.getCuriosityData();
             const weather = await curiosity.getWeather();
             res.status(200).render('mars', {
                 jsStringify,
-                photos,
-                data,
+                perseverancePhotos,
+                perseveranceData,
+                curiosityPhotos,
+                curiosityData,
                 weather
             });
         } catch (error) {

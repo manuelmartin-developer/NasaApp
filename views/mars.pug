@@ -16,20 +16,54 @@ html(lang="en")
         include ./header.pug
         #containerMars 
             #map
-            p#album_title
+            p#album_perseverance_title
                 |Latest photos of Perseverance 
-                span=photos.latest_photos[0].earth_date
-            #latest_photos
-                each photo in photos.latest_photos
+                span=perseverancePhotos.latest_photos[0].earth_date
+            button(id="btn_perseverance_album") View Album
+            #latest_perseverance_photos
+                each photo in perseverancePhotos.latest_photos
                     a(href=photo.img_src, target="_blank", rel="noopener noreferrer") 
-                        img(src=photo.img_src, alt="perseverande_photo")
+                        img(src=photo.img_src, alt="perseverance_photo")
+            p#album_curiosity_title
+                |Latest photos of Curiosity 
+                span=curiosityPhotos.latest_photos[0].earth_date
+            button(id="btn_curiosity_album") View Album
+            #latest_curiosity_photos
+                each photo in curiosityPhotos.latest_photos
+                    a(href=photo.img_src, target="_blank", rel="noopener noreferrer") 
+                        img(src=photo.img_src, alt="curiosity_photo")
             button(onclick="topFunction()" id="btn_top")
                 i(class="fas fa-chevron-circle-up")
     
         script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==', crossorigin='')
         script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet-realtime/2.2.0/leaflet-realtime.min.js', crossorigin='')
         script.
-            const data = !{jsStringify(data)};
+            const perseveranceData = !{jsStringify(perseveranceData)};
+            const curiosityData = !{jsStringify(curiosityData)};
             const weather = !{jsStringify(weather)};
+
+            const btn_perseverance_album = document.querySelector("#btn_perseverance_album");
+            const btn_curiosity_album = document.querySelector("#btn_curiosity_album");
+            const latest_perseverance_photos = document.querySelector("#latest_perseverance_photos");
+            const latest_curiosity_photos = document.querySelector("#latest_curiosity_photos");
+
+            btn_perseverance_album.addEventListener("click", () =>{
+                if(latest_perseverance_photos.style.display == "none"){
+                    latest_perseverance_photos.style.display = "flex";
+                    btn_perseverance_album.innerHTML = "Hide Album";
+                }else{
+                    latest_perseverance_photos.style.display = "none";
+                    btn_perseverance_album.innerHTML = "View Album";
+                }
+            });
+            btn_curiosity_album.addEventListener("click", () =>{
+                if(latest_curiosity_photos.style.display == "none"){
+                    latest_curiosity_photos.style.display = "flex";
+                    btn_curiosity_album.innerHTML = "Hide Album";
+                }else{
+                    latest_curiosity_photos.style.display = "none";
+                    btn_curiosity_album.innerHTML = "View Album";
+                }
+            });
         script(src="/utils/map_mars.js")
         script(src="/utils/top_button.js")

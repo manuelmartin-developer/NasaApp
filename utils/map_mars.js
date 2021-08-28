@@ -40,7 +40,24 @@ const perseverance = L.realtime({
                     iconSize: [50, 50]
                 })
             })
-            .bindPopup(`<b>Perseverance</b><br><b>Mission</b> ${data.msv.mission}<br><b>Location</b> ${data.tools[1].variables.sites[0].name}<br><b>Position</b> ${data.tools[1].variables.sites[0].view}<br><b>Daily Max. Temperature</b> ${weather.max_temp}°C<br><b>Daily Min. Temperature</b> ${weather.min_temp}°C`)
+            .bindPopup(`<H3>Perseverance</H3><br><b>Mission</b> ${perseveranceData.msv.mission}<br><b>Location</b> ${perseveranceData.tools[1].variables.sites[0].name}<br><b>Position</b> ${perseveranceData.tools[1].variables.sites[0].view}<br><b>Daily Max. Temperature</b> ${weather.max_temp}°C<br><b>Daily Min. Temperature</b> ${weather.min_temp}°C`)
+    }
+}).addTo(map);
+
+const curiosity = L.realtime({
+    url: 'https://mars.nasa.gov/mmgis-maps/MSL/Layers/json/MSL_waypoints_current.json',
+    crossOrigin: true,
+    type: 'json'
+}, {
+    interval: 300 * 1000,
+    pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {
+                'icon': L.icon({
+                    iconUrl: '/public/assets/rover.png',
+                    iconSize: [50, 50]
+                })
+            })
+            .bindPopup(`<H3>Curiosity</H3><br><b>Mission</b> ${curiosityData.msv.mission}<br><b>Location</b> ${curiosityData.tools[1].variables.sites[0].name}<br><b>Position</b> ${curiosityData.tools[1].variables.sites[0].view}<br><b>Daily Max. Temperature</b> ${weather.max_temp}°C<br><b>Daily Min. Temperature</b> ${weather.min_temp}°C`)
     }
 }).addTo(map);
 
