@@ -4,7 +4,7 @@ const curiosity = {
 
     getCuriosityPhotos : async () => {
 
-        const res = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?&camera=fhaz&api_key=${process.env.APOD_KEY}`);
+        const res = await fetch (`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?&api_key=${process.env.APOD_KEY}`);
         const data = await res.json();
         return data;
     },

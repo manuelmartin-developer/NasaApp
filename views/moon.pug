@@ -27,10 +27,10 @@ html(lang="en")
                     option(value=16)='Apollo XVI'
                     option(value=17)='Apollo XVII'
                 input(type='submit' value='Get Album' id="btn_album")
-            #apollo_photos
+            .grid_gallery3
                 each photo in photos.collection.items
-                    a(href=photo.links[0].href, target="_blank", rel="noopener noreferrer") 
-                        img(src=photo.links[0].href, alt="apollo_missions_photo")
+                    a(class="grid_gallery_item", href=photo.links[0].href, target="_blank", rel="noopener noreferrer") 
+                        img(class="grid_gallery_img", src=photo.links[0].href, alt="apollo_missions_photo")
             button(onclick="topFunction()" id="btn_top")
                 i(class="fas fa-chevron-circle-up")
     

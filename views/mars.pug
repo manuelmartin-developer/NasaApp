@@ -19,19 +19,19 @@ html(lang="en")
             p#album_perseverance_title
                 |Latest photos of Perseverance 
                 span=perseverancePhotos.latest_photos[0].earth_date
-            button(id="btn_perseverance_album") View Album
-            #latest_perseverance_photos
+            button(id="btn_perseverance_album") Show Album
+            .grid_gallery
                 each photo in perseverancePhotos.latest_photos
-                    a(href=photo.img_src, target="_blank", rel="noopener noreferrer") 
-                        img(src=photo.img_src, alt="perseverance_photo")
+                    a(class="grid_gallery_item", href=photo.img_src, target="_blank", rel="noopener noreferrer") 
+                        img(class="grid_gallery_img", src=photo.img_src, alt="perseverance_photo")
             p#album_curiosity_title
                 |Latest photos of Curiosity 
                 span=curiosityPhotos.latest_photos[0].earth_date
-            button(id="btn_curiosity_album") View Album
-            #latest_curiosity_photos
+            button(id="btn_curiosity_album") Show Album
+            .grid_gallery2
                 each photo in curiosityPhotos.latest_photos
-                    a(href=photo.img_src, target="_blank", rel="noopener noreferrer") 
-                        img(src=photo.img_src, alt="curiosity_photo")
+                    a(class="grid_gallery_item", href=photo.img_src, target="_blank", rel="noopener noreferrer") 
+                        img(class="grid_gallery_img", src=photo.img_src, alt="curiosity_photo")
             button(onclick="topFunction()" id="btn_top")
                 i(class="fas fa-chevron-circle-up")
     
@@ -44,25 +44,25 @@ html(lang="en")
 
             const btn_perseverance_album = document.querySelector("#btn_perseverance_album");
             const btn_curiosity_album = document.querySelector("#btn_curiosity_album");
-            const latest_perseverance_photos = document.querySelector("#latest_perseverance_photos");
-            const latest_curiosity_photos = document.querySelector("#latest_curiosity_photos");
+            const latest_perseverance_photos = document.querySelector(".grid_gallery");
+            const latest_curiosity_photos = document.querySelector(".grid_gallery2");
 
             btn_perseverance_album.addEventListener("click", () =>{
-                if(latest_perseverance_photos.style.display == "none"){
-                    latest_perseverance_photos.style.display = "flex";
-                    btn_perseverance_album.innerHTML = "Hide Album";
-                }else{
+                if(latest_perseverance_photos.style.display == "grid"){
                     latest_perseverance_photos.style.display = "none";
-                    btn_perseverance_album.innerHTML = "View Album";
+                    btn_perseverance_album.innerHTML = "Show Album";
+                }else{
+                    latest_perseverance_photos.style.display = "grid";
+                    btn_perseverance_album.innerHTML = "Hide Album";
                 }
             });
             btn_curiosity_album.addEventListener("click", () =>{
-                if(latest_curiosity_photos.style.display == "none"){
-                    latest_curiosity_photos.style.display = "flex";
-                    btn_curiosity_album.innerHTML = "Hide Album";
-                }else{
+                if(latest_curiosity_photos.style.display == "grid"){
                     latest_curiosity_photos.style.display = "none";
-                    btn_curiosity_album.innerHTML = "View Album";
+                    btn_curiosity_album.innerHTML = "Show Album";
+                }else{
+                    latest_curiosity_photos.style.display = "grid";
+                    btn_curiosity_album.innerHTML = "Hide Album";
                 }
             });
         script(src="/utils/map_mars.js")
