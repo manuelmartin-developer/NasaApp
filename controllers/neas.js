@@ -3,18 +3,21 @@ const Nea = require('../models/neas_model');
 
 const neas = {
 
+    homeNeas: async (req, res) => {
+        const data = await Nea.find();
+        res.status(200).render('neas', {
+            jsStringify,
+            data,
+        });
+    },
     getNeas: async (req, res) => {
         try {
             const queries = await req.query;
 
             if (Object.keys(queries) == 0) {
                 try {
-
-                    let data = await Nea.find();
-                    res.status(200).render('neas', {
-                        jsStringify,
-                        data
-                    });
+                    const data = await Nea.find();
+                    res.status(200).send(data);
                 } catch (error) {
                     res.status(400).json({
                         error: error.message
@@ -22,24 +25,12 @@ const neas = {
                 }
             } else if (queries.class) {
                 try {
-                    let queryClass = await queries.class
-                    if (queryClass !== 'Select a orbit class') {
-
-                        let data = await Nea.find({})
-                            .where({
-                                'orbit_class': queryClass
-                            })
-                        res.status(200).render('neas', {
-                            jsStringify,
-                            data
+                    const queryClass = await queries.class
+                    const data = await Nea.find({})
+                        .where({
+                            'orbit_class': queryClass
                         })
-                    } else {
-                        let data = await Nea.find();
-                        res.status(200).render('neas', {
-                            jsStringify,
-                            data
-                        });
-                    }
+                    res.status(200).send(data)
 
                 } catch (error) {
                     res.status(400).json({
@@ -47,46 +38,35 @@ const neas = {
                     });
                 }
             } else if (queries.from && queries.to) {
-                let queryFrom = await queries.from;
-                let queryTo = await queries.to;
-                let data = await Nea.find({})
+                const queryFrom = await queries.from;
+                const queryTo = await queries.to;
+                const data = await Nea.find({})
                     .where({
                         'discovery_date': {
                             $gte: queryFrom,
                             $lte: queryTo
                         }
                     })
-                res.status(200).render('neas', {
-                    jsStringify,
-                    data
-                })
+                res.status(200).send(data);
             } else if (queries.from) {
-                let queryFrom = await queries.from;
-                let queryTo = await queries.to;
-                let data = await Nea.find({})
+                const queryFrom = await queries.from;
+                const data = await Nea.find({})
                     .where({
                         'discovery_date': {
                             $gte: queryFrom
                         }
                     })
-                res.status(200).render('neas', {
-                    jsStringify,
-                    data
-                })
+                res.status(200).send(data);
 
             } else if (queries.to) {
-                let queryFrom = await queries.from;
-                let queryTo = await queries.to;
-                let data = await Nea.find({})
+                const queryTo = await queries.to;
+                const data = await Nea.find({})
                     .where({
                         'discovery_date': {
                             $lte: queryTo
                         }
                     })
-                res.status(200).render('neas', {
-                    jsStringify,
-                    data
-                })
+                res.status(200).send(data);
             }
         } catch (error) {
             res.status(400).json({
@@ -94,7 +74,6 @@ const neas = {
             });
         }
     }
-
 };
 
 module.exports = neas

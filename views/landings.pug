@@ -21,10 +21,11 @@ html
                     |Now are 
                     span(id="data_length")=`${data.length} `
                     |landings on the map
+                input(type="button", value="Reset Map", id="btn_reset")
             #queriesLandings
                 #formMinMass
                     input(type='number' name='minimum_mass' placeholder='Insert minimum mass' id='input_min_mass')
-                    input(type='submit' value='Filter by minimum mass' id='btn_min_mass')
+                    input(type='button' value='Filter by minimum mass' id='btn_min_mass')
                 #formEquMass
                     input(type='number' name='mass' placeholder='Insert mass' id='input_mass')
                     input(type="button", value="Filter by mass", id="btn_mass")
@@ -45,11 +46,13 @@ html
                     #input_years
                         input(type='number' name='from' placeholder='From' id='input_from' min="0" max=new Date().getFullYear())
                         input(type='number' name='to' placeholder='To' id='input_to' min="0" max=new Date().getFullYear())
-                    input(type='submit' value='Filter by years' id='btn_years')
+                    input(type='button' value='Filter by years' id='btn_years')
 
     script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==', crossorigin='')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet-realtime/2.2.0/leaflet-realtime.min.js', crossorigin='')
     script.
         const data = !{jsStringify(data)};
+        const iss = !{jsStringify(iss)};
     script(src="/utils/map_landings.js")
 
         

@@ -13,7 +13,7 @@ router.get('', home.home)
 router.get('/landings', landings.homeLandings)
 
 // NEAs
-router.get('/neas', neas.getNeas)
+router.get('/neas', neas.homeNeas)
 
 // Mars
 router.get('/mars', mars.home)

@@ -19,11 +19,11 @@ html(lang="en")
                 #neas_info
                     p#amount_neas
                         |Now are 
-                        span=`${data.length} `
+                        span(id="data_length")=`${data.length} `
                         |NEAs in your chart
-                    input(type="button", value="Reset" onclick="location.href='/api/astronomy/neas/'" id="btn_reset")
+                    input(type="button", value="Reset", id="btn_reset")
                 #neas_filters
-                    form(action='/api/astronomy/neas' method='GET' name='orbit_class' id='formClass')
+                    #formClass
                         input(id='inputOrbit' list='class' name='class')
                         - 
                             let neas_orbit_class = [];
@@ -36,10 +36,10 @@ html(lang="en")
                             each nea in neas_orbit_class
                                 option(value=nea)=nea
                         input(type='submit' value='Filter by orbit' id='button_orbit')
-                    form(action='/api/astronomy/neas' method='GET' name='date' id='formDate' novalidate)
+                    #formDate
                         #inputs_date
-                            input(type="date", name="from"  id="input_date_from")
-                            input(type="date", name="to" id="input_date_to")
+                            input(type="date", name="from", id="input_date_from" data-date="" data-date-format="YYYY MM DD")
+                            input(type="date", name="to", id="input_date_to" data-date="" data-date-format="YYYY MM DD")
                         input(type='submit' value='Filter by date' id='button_date')  
             #resultNeas
                 if data.length > 0

@@ -41,7 +41,22 @@ navigator.geolocation.watchPosition((position) => {
         iconUrl: '/public/assets/landing_icon.png'
     });
     let landingsLayer = L.layerGroup().addTo(map);
+    let issLayer = L.layerGroup().addTo(map);
+
+    let issIcon = new LeafIcon({
+        iconUrl: '/public/assets/iss.png'
+    });
+    const issCords = [parseFloat(iss.latitude), parseFloat(iss.longitude)];
+    const issVelocity = iss.velocity.toFixed(2)
+    const issAltitude = iss.altitude.toFixed(2)
+    L.marker(issCords, {
+            icon: issIcon
+        })
+        .bindPopup(`<b>International Space Station</b><br><b>Velocity</b> ${issVelocity} km/h<br><b>Altitude</b> ${issAltitude} km`)
+        .addTo(issLayer);
     
+ 
+
     let getData = async () => {
         const response = await fetch('https://still-waters-81962.herokuapp.com/api/astronomy/landings', {
             method: 'GET',
@@ -74,6 +89,7 @@ navigator.geolocation.watchPosition((position) => {
     let btn_mass = document.querySelector("#btn_mass");
     let btn_class = document.querySelector("#btn_class");
     let btn_years = document.querySelector("#btn_years");
+    let btn_reset = document.querySelector("#btn_reset");
     
     let input_min_mass = document.querySelector("#input_min_mass");
     let input_mass = document.querySelector("#input_mass");
@@ -183,6 +199,31 @@ navigator.geolocation.watchPosition((position) => {
             return data
         }       
         renderData();
+
+    });
+    btn_reset.addEventListener('click', () => {
+        getData = async function() {
+            const response = await fetch('https://still-waters-81962.herokuapp.com/api/astronomy/landings', {
+                method: 'GET',
+                mode: "cors",
+                cache: "default"
+            })
+            const data = await response.json();
+            data_length.innerHTML = `${data.length} `;
+            return data
+        }       
+        renderData();
+
+        input_min_mass.value = "";
+        input_mass.value = "";
+        input_class.value = "";
+        input_from.value = "";
+        input_to.value = "";
+
+        btn_min_mass.disabled = true;
+        btn_mass.disabled = true;
+        btn_class.disabled = true;
+        btn_years.disabled = true;
 
     });
 });
