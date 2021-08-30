@@ -49,9 +49,6 @@ const usersSchema = new mongoose.Schema({
     },
     necsDiscovered: {
         type: Array
-    },
-    token: {
-        type: String
     }
 });
 
