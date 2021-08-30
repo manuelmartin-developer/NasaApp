@@ -11,8 +11,7 @@ const connection = mongoose.createConnection(process.env.MONGODB_URI, {
 const usersSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     nickname: {
         type: String,
