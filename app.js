@@ -14,7 +14,7 @@ const port = process.env.PORT;
 
 const corsOptions = {
   origin: [
-    "http://localhost:process.env.PORT",
+    "https://localhost:process.env.PORT",
     "https://still-waters-81962.herokuapp.com/"
   ]
 };

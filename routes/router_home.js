@@ -10,7 +10,7 @@ const moon = require('../controllers/moon')
 router.get('', home.home)
 
 // Landings
-router.get('/landings', landings.getAllLandings)
+router.get('/landings', landings.homeLandings)
 
 // NEAs
 router.get('/neas', neas.getNeas)

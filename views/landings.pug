@@ -19,30 +19,29 @@ html
             #landings_info
                 p#amount_landings
                     |Now are 
-                    span=`${data.length} `
+                    span(id="data_length")=`${data.length} `
                     |landings on the map
-                input(type="button", value="Reset" onclick="location.href='/api/astronomy/landings/'" id="btn_reset")
             #queriesLandings
-                form(action='/api/astronomy/landings' method='GET' name='minimum_mass' id='formMinMass' autocomplete="off")
+                #formMinMass
                     input(type='number' name='minimum_mass' placeholder='Insert minimum mass' id='input_min_mass')
                     input(type='submit' value='Filter by minimum mass' id='btn_min_mass')
-                form(action='' method='GET' name='equal_mass' id='formEquMass' autocomplete="off")
+                #formEquMass
                     input(type='number' name='mass' placeholder='Insert mass' id='input_mass')
-                    input(type="button", value="Filter by mass" onclick="location.href=`/api/astronomy/landings/mass/${mass.value}`" id="btn_mass")
-                form(action='' method='GET' name='recclass' id='formRecclass' autocomplete="off")
+                    input(type="button", value="Filter by mass", id="btn_mass")
+                #formRecclass
                     input(id='input_class' list='recclass' name='recclass' placeholder='Insert class type')
                     -
-                        let landings_recclass = [];
-                        for(let landing of data){
-                            if(landings_recclass.indexOf(landing.recclass) === -1) {
-                            landings_recclass.push(landing.recclass);
-                            }
-                            }
+                            let landings_recclass = [];
+                            for(let landing of data){
+                                if(landings_recclass.indexOf(landing.recclass) === -1) {
+                                landings_recclass.push(landing.recclass);
+                                }
+                                }
                     datalist(id='recclass')
-                        each element in landings_recclass
-                            option(value=element)=element
-                    input(type="button", value="Filter by class" onclick="location.href=`/api/astronomy/landings/class/${recclass.value}`" id="btn_class")
-                form(action='/api/astronomy/landings' method='GET' name='year' id='formYear' autocomplete="off")
+                            each element in landings_recclass
+                                option(value=element)=element
+                    input(type="button", value="Filter by class", id="btn_class")
+                #formYear
                     #input_years
                         input(type='number' name='from' placeholder='From' id='input_from' min="0" max=new Date().getFullYear())
                         input(type='number' name='to' placeholder='To' id='input_to' min="0" max=new Date().getFullYear())
@@ -51,7 +50,6 @@ html
     script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==', crossorigin='')
     script.
         const data = !{jsStringify(data)};
-        const iss = !{jsStringify(iss)};
-    script(src="/utils/map.js")
+    script(src="/utils/map_landings.js")
 
         
