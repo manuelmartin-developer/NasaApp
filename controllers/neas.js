@@ -17,7 +17,7 @@ const neas = {
             if (Object.keys(queries) == 0) {
                 try {
                     const data = await Nea.find();
-                    res.status(200).send(data);
+                    res.status(200).json(data);
                 } catch (error) {
                     res.status(400).json({
                         error: error.message
@@ -30,7 +30,7 @@ const neas = {
                         .where({
                             'orbit_class': queryClass
                         })
-                    res.status(200).send(data)
+                    res.status(200).json(data)
 
                 } catch (error) {
                     res.status(400).json({
@@ -47,7 +47,7 @@ const neas = {
                             $lte: queryTo
                         }
                     })
-                res.status(200).send(data);
+                res.status(200).json(data);
             } else if (queries.from) {
                 const queryFrom = await queries.from;
                 const data = await Nea.find({})
@@ -56,7 +56,7 @@ const neas = {
                             $gte: queryFrom
                         }
                     })
-                res.status(200).send(data);
+                res.status(200).json(data);
 
             } else if (queries.to) {
                 const queryTo = await queries.to;
@@ -66,7 +66,7 @@ const neas = {
                             $lte: queryTo
                         }
                     })
-                res.status(200).send(data);
+                res.status(200).json(data);
             }
         } catch (error) {
             res.status(400).json({

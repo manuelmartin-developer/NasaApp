@@ -19,7 +19,7 @@ const landings = {
         
         if (Object.keys(queries) == 0) {
             const data = await Landing.find();
-            res.status(200).send(data);
+            res.status(200).json(data);
         } 
         if (queries.minimum_mass) {
             try {
@@ -30,7 +30,7 @@ const landings = {
                         $gte: minimum_mass
                     }
                 });
-                res.status(200).send(data);
+                res.status(200).json(data);
             } catch (error) {
 
                 res.status(400).json({
@@ -55,7 +55,7 @@ const landings = {
                     $gte: Number(from)
                 }
             });
-            res.status(200).send(data);
+            res.status(200).json(data);
 
 
         } else if (queries.to) {
@@ -65,7 +65,7 @@ const landings = {
                     $lte: Number(to)
                 }
             });
-            res.status(200).send(data);
+            res.status(200).json(data);
 
         }
     },
@@ -77,7 +77,7 @@ const landings = {
                 .where({
                     'mass': Number(mass)
                 })
-            res.status(200).send(data);
+            res.status(200).json(data);
 
         } catch (error) {
 
@@ -94,7 +94,7 @@ const landings = {
                 .where({
                     'recclass': recclass
                 })
-            res.status(200).send(data);
+            res.status(200).json(data);
 
         } catch (error) {
 
