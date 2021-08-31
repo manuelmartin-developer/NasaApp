@@ -1,6 +1,6 @@
 let myChart;
 let getData = async () => {
-    const response = await fetch('https://still-waters-81962.herokuapp.com/api/astronomy/neas', {
+    const response = await fetch('http://localhost:3000/api/astronomy/neas', {
         method: 'GET',
         mode: "cors",
         cache: "default"
@@ -154,7 +154,7 @@ input_date_to.addEventListener('input', () => {
 
 button_orbit.addEventListener('click', () => {
     getData = async function () {
-        const response = await fetch(`https://still-waters-81962.herokuapp.com/api/astronomy/neas?class=${inputOrbit.value}`, {
+        const response = await fetch(`http://localhost:3000/api/astronomy/neas?class=${inputOrbit.value}`, {
             method: 'GET',
             mode: "cors",
             cache: "default"
@@ -169,7 +169,7 @@ button_orbit.addEventListener('click', () => {
 
 button_date.addEventListener('click', () => {
     getData = async function () {
-        const response = await fetch(`https://still-waters-81962.herokuapp.com/api/astronomy/neas?from=${input_date_from.value}&to=${input_date_to.value}`, {
+        const response = await fetch(`http://localhost:3000/api/astronomy/neas?from=${input_date_from.value}&to=${input_date_to.value}`, {
             method: 'GET',
             mode: "cors",
             cache: "default"
@@ -184,7 +184,7 @@ button_date.addEventListener('click', () => {
 
 btn_reset.addEventListener('click', () => {
     getData = async function () {
-        const response = await fetch(`https://still-waters-81962.herokuapp.com/api/astronomy/neas`, {
+        const response = await fetch(`http://localhost:3000/api/astronomy/neas`, {
             method: 'GET',
             mode: "cors",
             cache: "default"
